@@ -4,12 +4,12 @@
 
 Orakl is a active learning library for PyTorch.
 
-# Installation
+## Installation
 **Installation Requirements**
 * Python >= 3.6
 * PyTorch >= 1.2
 
-## Manual
+#### Manual
 
 If you'd like to try our latest features, you can install the latest master directly from GitHub. For a basic install, run:
 
@@ -19,5 +19,5 @@ cd orakl
 pip install -e .
 ```
 
-# LICENSE
+## LICENSE
 Orakl is Apache-2.0 licensed, as found in the [LICENSE](LICENSE) file.
