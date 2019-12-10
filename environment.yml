@@ -1,0 +1,4 @@
+name: orakl
+dependencies:
+  - numpy
+  - pytorch>=1.2
