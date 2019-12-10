@@ -18,3 +18,6 @@ git clone https://github.com/nocotan/orakl.git
 cd orakl
 pip install -e .
 ```
+
+# LICENSE
+Orakl is Apache-2.0 licensed, as found in the [LICENSE](LICENSE) file.
