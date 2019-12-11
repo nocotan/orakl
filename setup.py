@@ -91,7 +91,7 @@ if __name__ == "__main__":
         long_description=long_description,
         long_description_content_type="text/markdown",
         python_requires=">=3.6",
-        install_requires=["matplotlib", "numpy", "tensorflow>=1.14.0"],
+        install_requires=["matplotlib", "numpy", "tensorflow>=2.0.0"],
         packages=find_packages(),
         extras_require={},
         package_data={},

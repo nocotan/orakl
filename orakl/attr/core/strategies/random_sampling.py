@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+import random
+from operator import itemgetter
+
 from ...base.strategies import BasePoolStrategy
 
 
-class ExpectedModelChange(BasePoolStrategy):
+class RandomSamplingPool(BasePoolStrategy):
     def __init__(self):
         self.data_pool = None
 
@@ -14,3 +17,8 @@ class ExpectedModelChange(BasePoolStrategy):
             data_pool_ = data_pool
         else:
             data_pool_ = self.data_pool
+
+        indexes = random.sample(range(0, len(list(data_pool))), n_samples)
+        samples = itemgetter(*indexes)(list(data_pool_))
+
+        return indexes, samples

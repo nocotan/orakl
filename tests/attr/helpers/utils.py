@@ -3,6 +3,7 @@ import unittest
 
 import random
 import numpy as np
+import tensorflow as tf
 
 
 class BaseTest(unittest.TestCase):
@@ -12,5 +13,6 @@ class BaseTest(unittest.TestCase):
     """
 
     def setUp(self):
-        random.seed(1234)
-        np.random.seed(1234)
+        random.seed(1024)
+        np.random.seed(1024)
+        tf.random.set_seed(1024)
