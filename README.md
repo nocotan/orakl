@@ -2,12 +2,12 @@
 
 ---
 
-Orakl is a active learning library for PyTorch.
+Orakl is a active learning library for TensorFlow.
 
 ## Installation
 **Installation Requirements**
-* Python >= 3.6
-* PyTorch >= 1.2
+* python >= 3.6
+* tensorflow>=1.14.0
 
 #### Manual
 

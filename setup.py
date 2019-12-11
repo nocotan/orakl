@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #
-# Welcome to the PyTorch Orakl setup.py.
+# Welcome to the TensorFlow Orakl setup.py.
 #
 
 import os
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     setup(
         name="orakl",
         version=version,
-        description="Active Learning for PyTorch",
+        description="Active Learning for TensorFlow",
         author="Masanari Kimura",
         license="Apache-2",
         url="",
@@ -77,7 +77,7 @@ if __name__ == "__main__":
             "Active Learning",
             "Sample Selection",
             "Human-In-The-Loop",
-            "PyTorch",
+            "TensorFlow",
         ],
         classifiers=[
             "Development Status :: 4 - Beta",
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         long_description=long_description,
         long_description_content_type="text/markdown",
         python_requires=">=3.6",
-        install_requires=["matplotlib", "numpy", "torch>=1.2"],
+        install_requires=["matplotlib", "numpy", "tensorflow>=1.14.0"],
         packages=find_packages(),
         extras_require={},
         package_data={},

@@ -1,4 +1,4 @@
 name: orakl
 dependencies:
   - numpy
-  - pytorch>=1.2
+  - tensorflow>=1.14.0
