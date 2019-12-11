@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import numpy as np
 import tensorflow as tf
 
 from orakl.attr import RandomSamplingPool
@@ -19,7 +20,7 @@ class Test(BaseTest):
         model = tf.keras.Model()
 
         n_samples = 10
-        data_pool = tf.data.Dataset.from_tensor_slices(list(range(20)))
+        data_pool = np.array(range(100))
         indexes, samples = rsp(model, data_pool=data_pool, n_samples=n_samples)
 
         assert(len(indexes) == n_samples)
