@@ -8,23 +8,17 @@ import tqdm
 import numpy as np
 import tensorflow as tf
 
-from ...base.strategies import BasePoolStrategy
+from .strategy import BasePoolStrategy
 from ...utils.functions import grad
 
 
 class ExpectedModelChange(BasePoolStrategy):
-    def __init__(self, loss_function=None, n_classes=None):
-        self.data_pool = None
-        self.loss_function = loss_function
-        self.n_classes = n_classes
-        self.excluded_indexes = None
-
     def __call__(self,
                  current_model,
-                 loss_function=None,
-                 n_classes=None,
                  data_pool=None,
                  excluded_indexes=None,
+                 loss_function=None,
+                 n_classes=None,
                  n_samples=10,
                  batch_size=32):
 

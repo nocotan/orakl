@@ -5,18 +5,17 @@ from __future__ import print_function
 from __future__ import unicode_literals
 import random
 
-from ...base.strategies import BasePoolStrategy
+from .strategy import BasePoolStrategy
 
 
 class RandomSamplingPool(BasePoolStrategy):
-    def __init__(self):
-        self.data_pool = None
-        self.excluded_indexes = None
 
     def __call__(self,
                  current_model,
                  data_pool=None,
                  excluded_indexes=None,
+                 loss_function=None,
+                 n_classes=None,
                  n_samples=10,
                  batch_size=32):
 
