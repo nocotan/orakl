@@ -13,15 +13,17 @@ class RandomSamplingPool(BasePoolStrategy):
         self.data_pool = None
         self.excluded_indexes = None
 
-    def __call__(self, current_model, data_pool=None,
-                 excluded_indexes=None, n_samples=10, batch_size=32):
+    def __call__(self,
+                 current_model,
+                 data_pool=None,
+                 excluded_indexes=None,
+                 n_samples=10,
+                 batch_size=32):
+
         if data_pool is None and self.data_pool is None:
             raise AssertionError("data pool is empty!")
 
-        if data_pool is not None:
-            data_pool_ = data_pool
-        else:
-            data_pool_ = self.data_pool
+        data_pool_ = data_pool if data_pool is not None else self.data_pool
 
         if excluded_indexes is not None:
             excluded_indexes_ = excluded_indexes
@@ -31,6 +33,7 @@ class RandomSamplingPool(BasePoolStrategy):
             excluded_indexes_ = []
 
         candidates = [i for i in range(0, len(list(data_pool_))) if i not in excluded_indexes_]
+
         indexes = random.sample(candidates, n_samples)
         samples = data_pool_[indexes]
 
