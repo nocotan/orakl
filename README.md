@@ -2,7 +2,7 @@
 
 ---
 
-Orakl is a active learning library for TensorFlow.
+Orakl is an active learning library for TensorFlow.
 
 ## Installation
 **Installation Requirements**
