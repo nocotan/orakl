@@ -13,6 +13,18 @@ from ...utils.functions import grad
 
 
 class ExpectedModelChange(BasePoolStrategy):
+    r"""Implements Expected Model Change Maximization algorithm.
+    It has been proposed in `Maximizing Expected Model Change for Active Learning in Regression`_.
+    .. _Maximizing Expected Model Change for Active Learning in Regression:
+        https://ieeexplore.ieee.org/abstract/document/6729489/
+
+    Raises:
+        AssertionError: if data pool is empty.
+        AssertionError: if loss function is empty.
+        AssertionError: if n_classes is not specified.
+    Returns:
+        (indexes, samples) (tuple) -- selected indexes and samples.
+    """
     def __call__(self,
                  current_model,
                  data_pool=None,
