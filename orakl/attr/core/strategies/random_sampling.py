@@ -9,6 +9,13 @@ from .strategy import BasePoolStrategy
 
 
 class RandomSamplingPool(BasePoolStrategy):
+    r"""Implements random sampling algorithm.
+
+    Raises:
+        AssertionError: if data pool is empty.
+    Returns:
+        (indexes, samples) (tuple) -- selected indexes and samples.
+    """
 
     def __call__(self,
                  current_model,
@@ -31,7 +38,8 @@ class RandomSamplingPool(BasePoolStrategy):
         else:
             excluded_indexes_ = []
 
-        candidates = [i for i in range(0, len(list(data_pool_))) if i not in excluded_indexes_]
+        n_data_pool = len(list(data_pool))
+        candidates = [i for i in range(0, n_data_pool) if i not in excluded_indexes_]
 
         indexes = random.sample(candidates, n_samples)
         samples = data_pool_[indexes]
