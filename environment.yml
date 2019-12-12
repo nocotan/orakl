@@ -1,4 +1,6 @@
 name: orakl
 dependencies:
+  - matplotlib
   - numpy
+  - tqdm
   - tensorflow>=2.0.0
