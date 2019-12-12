@@ -33,5 +33,10 @@ or recursive test execution via the command line is built-in:
 python3 -m unittest discover tests
 ```
 
+## Strategies
+
+* Random Samplling (baseline)
+* Expected Model Change
+
 ## LICENSE
 Orakl is Apache-2.0 licensed, as found in the [LICENSE](LICENSE) file.
