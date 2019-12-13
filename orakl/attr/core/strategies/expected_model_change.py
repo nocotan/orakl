@@ -65,25 +65,25 @@ class ExpectedModelChange(BasePoolStrategy):
 
             x = tf.convert_to_tensor(data_pool_[batch])
 
-        for i in range(n_classes_):
-            with tf.GradientTape() as tape:
-                tape.watch(x)
-                pred = current_model(x)
-                y = tf.constant(i, shape=(len(batch),))
-                loss_value = loss_function_(y, pred)
-                loss_value = tf.expand_dims(loss_value, 1)
+            pred = current_model(x)
+            for i in range(n_classes_):
+                with tf.GradientTape() as tape:
+                    tape.watch(x)
+                    y = tf.constant(i, shape=(len(batch),))
+                    loss_value = loss_function_(y, pred)
+                    loss_value = tf.expand_dims(loss_value, 1)
 
-                preds = pred[:, i]
-            grad_ = tape.batch_jacobian(loss_value, x)
+                    preds = pred[:, i]
+                grad_ = tape.batch_jacobian(loss_value, x)
 
-            # update expected gradients
-            # compute expected gradient length
-            grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
-            grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
-            grad_ = tf.abs(grad_)
-            grad_ = tf.reduce_mean(grad_, 1)
+                # update expected gradients
+                # compute expected gradient length
+                grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
+                grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
+                grad_ = tf.abs(grad_)
+                grad_ = tf.reduce_mean(grad_, 1)
 
-            expected_grads[batch] += (preds * grad_).numpy()
+                expected_grads[batch] += (preds * grad_).numpy()
 
         # print(expected_grads)
         indexes = heapq.nlargest(n_samples,
