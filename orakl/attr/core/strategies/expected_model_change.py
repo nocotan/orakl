@@ -74,8 +74,8 @@ class ExpectedModelChange(BasePoolStrategy):
                 # compute expected gradient length
                 grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
                 grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
-                grad_ = tf.reduce_mean(grad_, 1)
                 grad_ = tf.abs(grad_)
+                grad_ = tf.reduce_mean(grad_, 1)
 
                 expected_grads[batch] += (preds * grad_).numpy()
 
