@@ -64,20 +64,23 @@ class ExpectedModelChange(BasePoolStrategy):
         for batch in tqdm.tqdm(batches):
 
             x = tf.convert_to_tensor(data_pool_[batch])
+            ys = []
             for i in range(n_classes_):
-                y = tf.constant(i, shape=(len(batch),))
+                yi = tf.constant(i, shape=(len(batch), 1))
+                ys.append*yi
 
-                loss_value, grad_ = grad(current_model, x, y, loss_function_)
-                preds = current_model(x)[:, i]
+            y = tf.concat(ys, 1)
+            loss_value, grad_ = grad(current_model, x, y, loss_function_)
+            preds = current_model(x)[:, i]
 
-                # update expected gradients
-                # compute expected gradient length
-                grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
-                grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
-                grad_ = tf.abs(grad_)
-                grad_ = tf.reduce_mean(grad_, 1)
+            # update expected gradients
+            # compute expected gradient length
+            grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
+            grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
+            grad_ = tf.abs(grad_)
+            grad_ = tf.reduce_mean(grad_, 1)
 
-                expected_grads[batch] += (preds * grad_).numpy()
+            expected_grads[batch] += (preds * grad_).numpy()
 
         # print(expected_grads)
         indexes = heapq.nlargest(n_samples,
