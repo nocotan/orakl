@@ -64,14 +64,17 @@ class ExpectedModelChange(BasePoolStrategy):
         for batch in tqdm.tqdm(batches):
 
             x = tf.convert_to_tensor(data_pool_[batch])
-            ys = []
-            for i in range(n_classes_):
-                yi = tf.constant(i, shape=(len(batch), 1))
-                ys.append*yi
 
-            y = tf.concat(ys, 1)
-            loss_value, grad_ = grad(current_model, x, y, loss_function_)
-            preds = current_model(x)[:, i]
+        for i in range(n_classes_):
+            with tf.GradientTape() as tape:
+                tape.watch(x)
+                pred = current_model(x)
+                y = tf.constant(i, shape=(len(batch),))
+                loss_value = loss_function_(y, pred)
+                loss_value = tf.expand_dims(loss_value, 1)
+
+                preds = pred[:, i]
+            grad_ = tape.batch_jacobian(loss_value, x)
 
             # update expected gradients
             # compute expected gradient length
