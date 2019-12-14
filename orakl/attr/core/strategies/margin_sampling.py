@@ -40,10 +40,12 @@ class MarginSampling(BasePoolStrategy):
         n_data_pool = len(list(data_pool))
         candidates = [i for i in range(0, n_data_pool) if i not in excluded_indexes_]
         x = tf.convert_to_tensor(data_pool_[candidates])
-        preds = tf.reduce_max(current_model(x), 1)
+        preds = current_model(x)
+        sorted_preds = tf.sort(preds, axis=1, direction="DESCENDING")
+        margin = sorted_preds[:, 0] - sorted_preds[:, 1]
         indexes = heapq.nsmallest(n_samples,
                                   range(len(candidates)),
-                                  preds.__getitem__)
+                                  margin.__getitem__)
 
         samples = data_pool_[indexes]
 
