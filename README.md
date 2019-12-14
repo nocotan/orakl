@@ -6,7 +6,7 @@ Orakl is an active learning library for TensorFlow.
 
 ## Installation
 **Installation Requirements**
-* python >= 3.6
+* python >= 3.7
 * tensorflow>=2.0.0
 
 #### Manual
