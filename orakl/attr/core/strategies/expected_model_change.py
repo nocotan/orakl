@@ -74,16 +74,17 @@ class ExpectedModelChange(BasePoolStrategy):
                     loss_value = tf.expand_dims(loss_value, 1)
 
                     preds = pred[:, i]
-                grad_ = tape.batch_jacobian(loss_value, x)
+                # grad_ = tape.batch_jacobian(loss_value, x)
 
                 # update expected gradients
                 # compute expected gradient length
-                grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
-                grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
-                grad_ = tf.abs(grad_)
-                grad_ = tf.reduce_mean(grad_, 1)
+                # grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
+                # grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
+                # grad_ = tf.abs(grad_)
+                # grad_ = tf.reduce_mean(grad_, 1)
 
-                expected_grads[batch] += (preds * grad_).numpy()
+                # expected_grads[batch] += (preds * grad_).numpy()
+                expected_grads[batch] += (preds * tf.reduce_mean(loss_value, 1)).numpy()
 
         # print(expected_grads)
         indexes = heapq.nlargest(n_samples,
