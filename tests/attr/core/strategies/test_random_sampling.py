@@ -26,5 +26,14 @@ class Test(BaseTest):
         assert(len(indexes) == n_samples)
         assert(len(samples) == n_samples)
 
-        # print(indexes)
-        # print(samples)
+    def test_call_with_multi_dim_data(self):
+        rsp = RandomSamplingPool()
+        model = tf.keras.Model()
+
+        n_samples = 10
+        data_pool = np.random.rand(100, 10, 10)
+
+        indexes, samples = rsp(model, data_pool=data_pool, n_samples=n_samples)
+
+        assert(len(indexes) == n_samples)
+        assert(len(samples) == n_samples)
