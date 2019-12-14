@@ -37,6 +37,7 @@ python3 -m unittest discover tests
 
 * Random Samplling (baseline)
 * Expected Model Change Maximization [1]
+* Margin Sampling
 
 ## LICENSE
 Orakl is Apache-2.0 licensed, as found in the [LICENSE](LICENSE) file.
