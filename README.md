@@ -4,6 +4,10 @@
 
 Orakl is an active learning library for TensorFlow.
 
+| System | 3.7 |
+| :---: | :---: |
+| Linux CPU | [![CircleCI](https://circleci.com/gh/nocotan/orakl/tree/master.svg?style=svg&circle-token=1091a539965fbe97885c9107541dd71dd2d6ad71)](https://circleci.com/gh/nocotan/orakl/tree/master) | <center>—</center> |
+
 ## Installation
 **Installation Requirements**
 * python >= 3.7
