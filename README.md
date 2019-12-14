@@ -37,10 +37,11 @@ python3 -m unittest discover tests
 
 * Random Samplling (baseline)
 * Expected Model Change Maximization [1]
-* Margin Sampling
+* Margin Sampling [2]
 
 ## LICENSE
 Orakl is Apache-2.0 licensed, as found in the [LICENSE](LICENSE) file.
 
 ## References
 - [1] Cai, Wenbin, Ya Zhang, and Jun Zhou. "Maximizing expected model change for active learning in regression." 2013 IEEE 13th International Conference on Data Mining. IEEE, 2013.
+- [2] Wang, Dan, and Yi Shang. "A new active labeling method for deep learning." 2014 International joint conference on neural networks (IJCNN). IEEE, 2014.
