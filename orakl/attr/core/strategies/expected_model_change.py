@@ -57,34 +57,29 @@ class ExpectedModelChange(BasePoolStrategy):
         n_data_pool = len(list(data_pool))
         candidates = [i for i in range(0, n_data_pool) if i not in excluded_indexes_]
 
-        n_split = (len(candidates) / batch_size) + (len(candidates) % batch_size > 0)
-        batches = np.array_split(np.array(candidates), n_split)
-
         expected_grads = np.zeros((len(candidates),))
-        for batch in tqdm.tqdm(batches):
+        x = tf.convert_to_tensor(data_pool_)
 
-            x = tf.convert_to_tensor(data_pool_[batch])
+        pred = current_model(x)
+        for i in range(n_classes_):
+            with tf.GradientTape() as tape:
+                tape.watch(x)
+                y = tf.constant(i, shape=(len(candidates),))
+                loss_value = loss_function_(y, pred)
+                loss_value = tf.expand_dims(loss_value, 1)
 
-            pred = current_model(x)
-            for i in range(n_classes_):
-                with tf.GradientTape() as tape:
-                    tape.watch(x)
-                    y = tf.constant(i, shape=(len(batch),))
-                    loss_value = loss_function_(y, pred)
-                    loss_value = tf.expand_dims(loss_value, 1)
+                preds = pred[:, i]
+            grad_ = tape.batch_jacobian(loss_value, x)
 
-                    preds = pred[:, i]
-                grad_ = tape.batch_jacobian(loss_value, x)
+            # update expected gradients
+            # compute expected gradient length
+            grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
+            grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
+            grad_ = tf.pow(grad_, 2)
+            grad_ = tf.reduce_sum(grad_, 1)
+            grad_ = tf.square(grad_)
 
-                # update expected gradients
-                # compute expected gradient length
-                grad_ = tf.reshape(grad_, shape=(len(grad_), -1))
-                grad_ = tf.dtypes.cast(grad_, tf.dtypes.float32)
-                grad_ = tf.pow(grad_, 2)
-                grad_ = tf.reduce_sum(grad_, 1)
-                grad_ = tf.square(grad_)
-
-                expected_grads[batch] += (preds * grad_).numpy()
+            expected_grads += (preds * grad_).numpy()
 
         # print(expected_grads)
         indexes = heapq.nlargest(n_samples,
