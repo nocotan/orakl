@@ -9,7 +9,6 @@ import numpy as np
 import tensorflow as tf
 
 from .strategy import BasePoolStrategy
-from ...utils.functions import grad
 
 
 class ExpectedModelChange(BasePoolStrategy):
@@ -34,12 +33,15 @@ class ExpectedModelChange(BasePoolStrategy):
                  n_samples=10,
                  batch_size=32):
 
+        # check if data pool is empty or not.
         if data_pool is None and self.data_pool is None:
             raise AssertionError("data pool is empty!")
 
+        # check if loss function is None or not.
         if loss_function is None and self.loss_function is None:
             raise AssertionError("loss function is empty!")
 
+        # check if number of classes is None or not.
         if n_classes is None and self.n_classes is None:
             raise AssertionError("please specify number of classes!")
 
