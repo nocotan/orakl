@@ -56,4 +56,15 @@ class BasePoolStrategy(abc.ABC):
         self.__dict__.update(state)
 
     def __repr__(self):
-        return self.__getstate__()
+        state = self.__getstate__()
+
+        s = "\n================================"
+        s += "\ndata_pool: {}".format(len(state["data_pool"]))
+        s += "\nexcluded_indexes: {}".format(state["excluded_indexes"])
+        s += "\nloss_function: {}".format(state["loss_function"])
+        s += "\nn_classes: {}".format(state["n_classes"])
+        s += "\nn_samples: {}".format(state["n_samples"])
+        s += "\nbatch_size: {}".format(state["batch_size"])
+        s += "\n================================"
+
+        return s
