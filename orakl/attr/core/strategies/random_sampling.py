@@ -26,6 +26,7 @@ class RandomSamplingPool(BasePoolStrategy):
                  n_samples=10,
                  batch_size=32):
 
+        # check if data pool is empty or not.
         if data_pool is None and self.data_pool is None:
             raise AssertionError("data pool is empty!")
 
